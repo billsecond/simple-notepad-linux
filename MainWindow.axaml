@@ -1,0 +1,103 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="Notepad.MainWindow"
+        Width="900" Height="640"
+        Icon="/Assets/notepad.png"
+        Title="Untitled - Notepad">
+
+    <Window.Styles>
+        <!-- Replace the Fluent TextBox's blue focus accent with a plain,
+             uniform 1px border in every state. -->
+        <Style Selector="TextBox#Editor /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#7F808080"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox#Editor:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#7F808080"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="TextBox#Editor:focus /template/ Border#PART_BorderElement">
+            <Setter Property="BorderBrush" Value="#7F808080"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Styles>
+
+    <DockPanel LastChildFill="True">
+
+        <!-- ===== Menu ===== -->
+        <Menu DockPanel.Dock="Top" Name="MainMenu">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" InputGesture="Ctrl+N" Click="OnNew"/>
+                <MenuItem Header="_Open..." InputGesture="Ctrl+O" Click="OnOpen"/>
+                <MenuItem Header="_Save" InputGesture="Ctrl+S" Click="OnSave"/>
+                <MenuItem Header="Save _As..." InputGesture="Ctrl+Shift+S" Click="OnSaveAs"/>
+                <Separator/>
+                <MenuItem Header="E_xit" Click="OnExit"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Undo" InputGesture="Ctrl+Z" Click="OnUndo"/>
+                <MenuItem Header="_Redo" InputGesture="Ctrl+Y" Click="OnRedo"/>
+                <Separator/>
+                <MenuItem Header="Cu_t" InputGesture="Ctrl+X" Click="OnCut"/>
+                <MenuItem Header="_Copy" InputGesture="Ctrl+C" Click="OnCopy"/>
+                <MenuItem Header="_Paste" InputGesture="Ctrl+V" Click="OnPaste"/>
+                <MenuItem Header="De_lete" InputGesture="Delete" Click="OnDelete"/>
+                <Separator/>
+                <MenuItem Header="_Find..." InputGesture="Ctrl+F" Click="OnFind"/>
+                <MenuItem Header="Find _Next" InputGesture="F3" Click="OnFindNext"/>
+                <MenuItem Header="_Replace..." InputGesture="Ctrl+H" Click="OnReplace"/>
+                <MenuItem Header="_Go To..." InputGesture="Ctrl+G" Click="OnGoTo" Name="GoToItem"/>
+                <Separator/>
+                <MenuItem Header="Select _All" InputGesture="Ctrl+A" Click="OnSelectAll"/>
+                <MenuItem Header="Time/_Date" InputGesture="F5" Click="OnTimeDate"/>
+            </MenuItem>
+            <MenuItem Header="F_ormat">
+                <MenuItem Header="_Word Wrap" Name="WordWrapItem" Click="OnToggleWordWrap"/>
+                <MenuItem Header="_Font..." Click="OnChooseFont"/>
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="Zoom _In  (Ctrl +)" Click="OnZoomIn"/>
+                <MenuItem Header="Zoom _Out  (Ctrl -)" Click="OnZoomOut"/>
+                <MenuItem Header="_Restore Default Zoom  (Ctrl 0)" Click="OnZoomReset"/>
+                <Separator/>
+                <MenuItem Header="_Theme">
+                    <MenuItem Header="Use _System Setting" Name="ThemeSystemItem" Click="OnThemeSystem"/>
+                    <MenuItem Header="_Light" Name="ThemeLightItem" Click="OnThemeLight"/>
+                    <MenuItem Header="_Dark" Name="ThemeDarkItem" Click="OnThemeDark"/>
+                </MenuItem>
+                <MenuItem Header="_Status Bar" Name="StatusBarItem" Click="OnToggleStatusBar"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About Notepad" Click="OnAbout"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- ===== Status bar ===== -->
+        <Border DockPanel.Dock="Bottom" Name="StatusBar"
+                BorderBrush="#7F808080" BorderThickness="0,1,0,0" Padding="8,3">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                <TextBlock Grid.Column="0" Name="PositionText" Text="Ln 1, Col 1"
+                           HorizontalAlignment="Right" Margin="0,0,16,0"/>
+                <TextBlock Grid.Column="1" Name="ZoomText" Text="100%" Margin="0,0,16,0"/>
+                <TextBlock Grid.Column="2" Name="LineEndingText" Text="Windows (CRLF)" Margin="0,0,16,0"/>
+                <TextBlock Grid.Column="3" Name="EncodingText" Text="UTF-8"/>
+            </Grid>
+        </Border>
+
+        <!-- ===== Editor ===== -->
+        <TextBox Name="Editor"
+                 AcceptsReturn="True" AcceptsTab="True"
+                 TextWrapping="NoWrap"
+                 FontFamily="Cascadia Code, Consolas, Menlo, monospace"
+                 FontSize="14"
+                 BorderThickness="1"
+                 BorderBrush="#7F808080"
+                 CornerRadius="0"
+                 Padding="6,4"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+    </DockPanel>
+</Window>

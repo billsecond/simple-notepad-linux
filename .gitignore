@@ -1,0 +1,15 @@
+# Build output
+bin/
+obj/
+publish/
+
+# Editor / IDE
+.vs/
+*.user
+.idea/
+
+# Claude Code local settings
+.claude/
+
+# Local .NET install (if placed in-tree)
+.dotnet/
