@@ -44,12 +44,16 @@ bash packaging/build-deb.sh "$VERSION"
 echo "==> [3/6] Build signed APT repo"
 bash packaging/build-apt-repo.sh build/aptrepo
 
-echo "==> [4/6] Commit & push source (main)"
+echo "==> [4/7] Sync snap version to $VERSION"
+sed -i -E "s/^version: .*/version: '$VERSION'/" snap/snapcraft.yaml
+echo "    snap/snapcraft.yaml -> $(grep -E '^version:' snap/snapcraft.yaml)"
+
+echo "==> [5/7] Commit & push source (main) — triggers the snap build/publish CI"
 git add -A
 git commit -q -m "Deploy v$VERSION" || echo "    (no source changes to commit)"
 git push "https://${TOKEN}@github.com/${REPO_SLUG}.git" main 2>&1 | scrub
 
-echo "==> [5/6] Publish APT repo to gh-pages (force)"
+echo "==> [6/7] Publish APT repo to gh-pages (force)"
 GHP="$(mktemp -d)"
 cp -a build/aptrepo/. "$GHP/"
 touch "$GHP/.nojekyll"          # serve files verbatim (no Jekyll processing)
@@ -61,7 +65,7 @@ git -C "$GHP" -c user.name="Simple Notepad Deploy" -c user.email="william@daughe
 git -C "$GHP" push -q --force "https://${TOKEN}@github.com/${REPO_SLUG}.git" gh-pages 2>&1 | scrub
 rm -rf "$GHP"
 
-echo "==> [6/6] Ensure GitHub Pages is enabled"
+echo "==> [7/7] Ensure GitHub Pages is enabled"
 curl -s -o /dev/null -w '    pages api: %{http_code}\n' -X POST \
     -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github+json" \
     "https://api.github.com/repos/${REPO_SLUG}/pages" \
@@ -69,11 +73,16 @@ curl -s -o /dev/null -w '    pages api: %{http_code}\n' -X POST \
 
 cat <<EOF
 
-==> Done (v$VERSION). Users install with:
+==> Done (v$VERSION).
 
-  sudo install -d /etc/apt/keyrings
-  curl -fsSL $PAGES_URL/pubkey.gpg | sudo tee /etc/apt/keyrings/wdnotepad.gpg >/dev/null
-  echo "deb [signed-by=/etc/apt/keyrings/wdnotepad.gpg] $PAGES_URL ./" | sudo tee /etc/apt/sources.list.d/wdnotepad.list
-  sudo apt update
-  sudo apt install wdnotepad
+  Snap (publishes via CI once SNAPCRAFT_STORE_CREDENTIALS secret is set):
+    sudo snap install wdnotepad
+
+  APT:
+    sudo install -d /etc/apt/keyrings
+    curl -fsSL $PAGES_URL/pubkey.gpg | sudo tee /etc/apt/keyrings/wdnotepad.gpg >/dev/null
+    echo "deb [signed-by=/etc/apt/keyrings/wdnotepad.gpg] $PAGES_URL ./" | sudo tee /etc/apt/sources.list.d/wdnotepad.list
+    sudo apt update && sudo apt install wdnotepad
+
+  Snap build status: https://github.com/${REPO_SLUG}/actions
 EOF
