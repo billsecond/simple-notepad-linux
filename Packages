@@ -1,0 +1,20 @@
+Package: wdnotepad
+Version: 1.0.0
+Architecture: amd64
+Maintainer: William Daugherty <william@daugherty.info>
+Installed-Size: 105824
+Depends: libc6, libstdc++6, libgcc-s1, zlib1g, libfontconfig1, libx11-6, libice6, libsm6
+Filename: ./wdnotepad_1.0.0_amd64.deb
+Size: 36385678
+MD5sum: 2470fc8b0d3b9d972a4f39e363a21bab
+SHA1: f4a298813cd9777f1c88fc7d8688a2455d8957b8
+SHA256: fa38009b15c639327ab41355b7d3f63cb3eade493e1ae2e302359ed3b91101f2
+Section: editors
+Priority: optional
+Homepage: https://github.com/billsecond/simple-notepad-linux
+Description: Simple Notepad - a lightweight Notepad clone
+ A faithful clone of the classic Windows Notepad, built with .NET 10 and
+ Avalonia (XAML). File/Edit/Format/View menus, find and replace, go-to-line,
+ word wrap, font picker, zoom, a system theme with light/dark override, and
+ persisted settings. Self-contained: no .NET runtime required.
+

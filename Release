@@ -1,0 +1,14 @@
+Origin: Simple Notepad
+Label: Simple Notepad
+Suite: stable
+Codename: stable
+Architectures: amd64
+Components: main
+Date: Thu, 04 Jun 2026 21:42:29 +0000
+Description: Simple Notepad APT repository
+MD5Sum:
+ 2a81cb7932bd215b619b7ea4d84d3128              880 Packages
+ 49f2c0cec59ae41595d698f124f92676              615 Packages.gz
+SHA256:
+ fc79d5cf78acd77db7066548bd25ba1a7b6616cf3c64e0534495196fbbf31229              880 Packages
+ 58c92efe9a7d28bbdd8b658c08ed405bfd4ac3166bfa850efe2dde825e5b64db              615 Packages.gz

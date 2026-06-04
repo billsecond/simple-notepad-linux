@@ -1,0 +1,9 @@
+<!doctype html><meta charset="utf-8"><title>wdnotepad APT repo</title>
+<h1>wdnotepad &mdash; APT repository</h1>
+<pre>
+sudo install -d /etc/apt/keyrings
+curl -fsSL https://billsecond.github.io/simple-notepad-linux/pubkey.gpg | sudo tee /etc/apt/keyrings/wdnotepad.gpg >/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/wdnotepad.gpg] https://billsecond.github.io/simple-notepad-linux ./" | sudo tee /etc/apt/sources.list.d/wdnotepad.list
+sudo apt update
+sudo apt install wdnotepad
+</pre>

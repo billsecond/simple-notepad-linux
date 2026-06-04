@@ -1,0 +1,33 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: Simple Notepad
+Label: Simple Notepad
+Suite: stable
+Codename: stable
+Architectures: amd64
+Components: main
+Date: Thu, 04 Jun 2026 21:42:29 +0000
+Description: Simple Notepad APT repository
+MD5Sum:
+ 2a81cb7932bd215b619b7ea4d84d3128              880 Packages
+ 49f2c0cec59ae41595d698f124f92676              615 Packages.gz
+SHA256:
+ fc79d5cf78acd77db7066548bd25ba1a7b6616cf3c64e0534495196fbbf31229              880 Packages
+ 58c92efe9a7d28bbdd8b658c08ed405bfd4ac3166bfa850efe2dde825e5b64db              615 Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEgDHImmjgjFj2GnqD8rEdH4L/pEIFAmoh8UUACgkQ8rEdH4L/
+pEIx6A//aedwQauyimG6THIZ1jHnETXDzFr47TA2T8xLUG2cboy2h/bP88CJul23
+OXy4ypwusZIxlmY0B/tz8CJFKzabyo/aihsRdQuL0GAq65Rr9QfQTK2krpYa2cXW
+/8XDNFeAMAOW5Z9n+sLBgyKUZYkusBqo5DZe+gKGuPWSBQrUuwQkKibioKWjlNKW
+f1QC7HZi3eFiyTJxW6XrxlXk8WVtIm+Hvrr8Pv0+pozLhP+noPcMMpbHU0QeCcbB
+2V6f2lfkkLklLZx4JkMlvbbBChiuYaLhfm1iV3WTE838zFZRLtPvECygwv70Wstc
+irBftxliGQogmhWe9cyJY4RpiD3XZCtpt7+Rz0xFdm0U70xNIssQj/SowcAh8nZg
+pWnjgu0kPgRGCWPlXrMLdKy0WcVEt+ATKcA5qJMMnMD9HOEtAj/iIbR3WY7cld2f
++FzVUO6mAJPfVVNfVYfjFdo7SMn+JX1snunWhFCwOY0BGO4PoMYAFlJ+T3aLgo1r
+cXwsSrVmiln9PQGPwh9nt0/p2gdTJ4LfO5OGqvYZV+aYBU8Mr4ffs9hmVWHPgfmo
+W5vdLMuPs8E5xBu263mE9I+qf6DsEO9P1vLEY8tAvRX8/Sd5FJicl1nOE2BppvsQ
+TjjldQOWLhPXHLoBVxF2D2h41LBA5XQHAvIRx8fvReTvPaBMSLA=
+=asTV
+-----END PGP SIGNATURE-----
