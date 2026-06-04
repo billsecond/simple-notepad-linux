@@ -2,6 +2,9 @@
 bin/
 obj/
 publish/
+dist/
+build/
+*.deb
 
 # Editor / IDE
 .vs/
@@ -13,3 +16,16 @@ publish/
 
 # Local .NET install (if placed in-tree)
 .dotnet/
+
+# --- secrets / credentials: never commit these ---
+git.txt
+*token*
+*secret*
+*.pem
+*.key
+id_rsa*
+*-private.*
+*.gpg
+!packaging/**         # (scripts here are safe to track)
+.gnupg/
+.env

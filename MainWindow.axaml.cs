@@ -359,11 +359,13 @@ public partial class MainWindow : Window
 
         // Focus the editor so the match is highlighted with the active
         // selection colour and scrolled into view; this also lets F3 repeat
-        // the search while typing continues in the document.
+        // the search. NOTE: set CaretIndex *before* the selection — assigning
+        // CaretIndex collapses the selection to a caret, so it must not come
+        // last or the match never highlights.
         Editor.Focus();
+        Editor.CaretIndex = index + text.Length;
         Editor.SelectionStart = index;
         Editor.SelectionEnd = index + text.Length;
-        Editor.CaretIndex = index + text.Length;
         return true;
     }
 
