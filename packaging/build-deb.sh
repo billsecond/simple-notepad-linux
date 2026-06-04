@@ -11,7 +11,7 @@ set -euo pipefail
 VERSION="${1:-1.0.0}"
 ARCH="amd64"
 RID="linux-x64"
-PKG="simple-notepad"
+PKG="wdnotepad"
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." >/dev/null 2>&1 && pwd)"
 cd "$ROOT"
@@ -39,8 +39,8 @@ mkdir -p "$APPDIR" "$BINDIR" "$DESKTOPDIR" "$ICONDIR" "$PKGDIR/DEBIAN"
 cp -a "$PUBLISH/." "$APPDIR/"
 cp -f "Assets/notepad.png" "$ICONDIR/$PKG.png"
 
-# launchers: every capitalization, with or without a filename
-for name in notepad Notepad notepad.exe Notepad.exe; do
+# launchers: the package name plus every capitalization of notepad
+for name in wdnotepad notepad Notepad notepad.exe Notepad.exe; do
     cat > "$BINDIR/$name" <<EOF
 #!/bin/sh
 exec "/usr/lib/$PKG/Notepad" "\$@"
@@ -101,6 +101,7 @@ chmod 0755 "$PKGDIR/DEBIAN/postinst" "$PKGDIR/DEBIAN/postrm"
 
 # ---- build --------------------------------------------------------------------
 mkdir -p "$ROOT/dist"
+rm -f "$ROOT"/dist/*.deb   # drop any stale package (e.g. an old name) from the repo
 DEB="$ROOT/dist/${PKG}_${VERSION}_${ARCH}.deb"
 dpkg-deb --build --root-owner-group "$PKGDIR" "$DEB"
 

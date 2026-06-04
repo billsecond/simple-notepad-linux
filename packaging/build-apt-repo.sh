@@ -71,14 +71,14 @@ gpg --export --armor "$FPR" > pubkey.asc
 
 # Friendly landing page
 cat > index.html <<HTML
-<!doctype html><meta charset="utf-8"><title>Simple Notepad APT repo</title>
-<h1>Simple Notepad &mdash; APT repository</h1>
+<!doctype html><meta charset="utf-8"><title>wdnotepad APT repo</title>
+<h1>wdnotepad &mdash; APT repository</h1>
 <pre>
 sudo install -d /etc/apt/keyrings
-curl -fsSL $PAGES_URL/pubkey.gpg | sudo tee /etc/apt/keyrings/simple-notepad.gpg >/dev/null
-echo "deb [signed-by=/etc/apt/keyrings/simple-notepad.gpg] $PAGES_URL ./" | sudo tee /etc/apt/sources.list.d/simple-notepad.list
+curl -fsSL $PAGES_URL/pubkey.gpg | sudo tee /etc/apt/keyrings/wdnotepad.gpg >/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/wdnotepad.gpg] $PAGES_URL ./" | sudo tee /etc/apt/sources.list.d/wdnotepad.list
 sudo apt update
-sudo apt install simple-notepad
+sudo apt install wdnotepad
 </pre>
 HTML
 

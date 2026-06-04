@@ -37,12 +37,27 @@ This clones the repo and runs `install.sh`, which automatically installs the
 .NET 10 SDK into `~/.dotnet` if it isn't already present, then builds and
 installs Simple Notepad.
 
+**Or via APT** (true `apt install`, with `apt update` upgrades):
+
+```bash
+sudo install -d /etc/apt/keyrings
+curl -fsSL https://billsecond.github.io/simple-notepad-linux/pubkey.gpg \
+  | sudo tee /etc/apt/keyrings/wdnotepad.gpg >/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/wdnotepad.gpg] https://billsecond.github.io/simple-notepad-linux ./" \
+  | sudo tee /etc/apt/sources.list.d/wdnotepad.list
+sudo apt update
+sudo apt install wdnotepad
+```
+
 **Or from a local checkout:**
 
 ```bash
 ./install.sh          # per-user install into ~/.local (no root needed)
 sudo ./install.sh     # system-wide install into /usr/local
 ```
+
+After installing, run `notepad` (or `wdnotepad`) from a terminal or launch
+"Simple Notepad" from your application menu.
 
 The installer publishes a **self-contained** build (so the result runs without
 needing the .NET SDK/runtime installed), then:
