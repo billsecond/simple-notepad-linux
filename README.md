@@ -27,6 +27,12 @@ Everything the original Notepad does, and nothing it doesn't:
 
 ## Install (Linux)
 
+**Snap (any distro with snap, zero setup):**
+
+```bash
+sudo snap install wdnotepad
+```
+
 **One line — installs the .NET runtime and the app:**
 
 ```bash

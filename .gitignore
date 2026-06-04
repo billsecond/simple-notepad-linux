@@ -11,7 +11,7 @@ build/
 *.user
 .idea/
 
-# Claude Code local settings
+# Local agent / editor session settings
 .claude/
 
 # Local .NET install (if placed in-tree)

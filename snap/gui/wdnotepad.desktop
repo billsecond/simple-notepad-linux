@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Simple Notepad
+GenericName=Text Editor
+Comment=A simple Notepad clone
+Exec=wdnotepad %f
+Icon=${SNAP}/meta/gui/wdnotepad.png
+Terminal=false
+Categories=Utility;TextEditor;
+MimeType=text/plain;
+Keywords=notepad;text;editor;

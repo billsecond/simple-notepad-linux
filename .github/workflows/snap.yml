@@ -1,0 +1,34 @@
+name: Build & publish snap
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  snap:
+    runs-on: ubuntu-latest
+    env:
+      # 'true' only when the publishing secret is configured.
+      HAVE_CREDS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build snap
+        id: build
+        uses: snapcore/action-build@v1
+
+      - name: Upload built snap as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wdnotepad-snap
+          path: ${{ steps.build.outputs.snap }}
+
+      - name: Publish to the Snap Store (stable)
+        if: env.HAVE_CREDS == 'true'
+        uses: snapcore/action-publish@v1
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          release: stable

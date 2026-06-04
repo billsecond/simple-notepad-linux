@@ -1,0 +1,56 @@
+name: wdnotepad
+base: core24
+version: '1.0.0'
+summary: A simple, lightweight Notepad clone
+description: |
+  A faithful clone of the classic Windows Notepad, built with .NET 10 and
+  Avalonia (XAML). File/Edit/Format/View menus, find and replace, go-to-line,
+  word wrap, a font picker, zoom, a system theme with light/dark override, and
+  persisted settings. Type immediately on launch; standard shortcuts
+  (Ctrl+N/O/S, Ctrl+F/H/G, F3, F5, Ctrl + +/-/0) all work.
+license: MIT
+icon: snap/gui/wdnotepad.png
+grade: stable
+confinement: strict
+
+platforms:
+  amd64:
+
+apps:
+  wdnotepad:
+    command: bin/wdnotepad
+    extensions: [gnome]
+    plugs:
+      - home
+      - removable-media
+
+parts:
+  wdnotepad:
+    plugin: nil
+    source: .
+    build-packages:
+      - curl
+      - ca-certificates
+      - libicu74
+    stage-packages:
+      - libfontconfig1
+      - libx11-6
+      - libice6
+      - libsm6
+    override-build: |
+      set -eux
+      export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
+      curl -fsSL https://dot.net/v1/dotnet-install.sh -o "$CRAFT_PART_BUILD/dotnet-install.sh"
+      bash "$CRAFT_PART_BUILD/dotnet-install.sh" --channel 10.0 --install-dir "$CRAFT_PART_BUILD/.dotnet"
+      DOTNET="$CRAFT_PART_BUILD/.dotnet/dotnet"
+
+      "$DOTNET" publish Notepad.csproj -c Release -r linux-x64 --self-contained true \
+        -p:InvariantGlobalization=true -p:DebugType=none -p:DebugSymbols=false \
+        -o "$CRAFT_PART_INSTALL/opt/wdnotepad"
+
+      mkdir -p "$CRAFT_PART_INSTALL/bin"
+      cat > "$CRAFT_PART_INSTALL/bin/wdnotepad" <<'SH'
+      #!/bin/sh
+      exec "$SNAP/opt/wdnotepad/Notepad" "$@"
+      SH
+      chmod +x "$CRAFT_PART_INSTALL/bin/wdnotepad"
