@@ -3,6 +3,10 @@ name: Build & publish snap
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - 'winforms-dotnet-framework/**'
   workflow_dispatch:
 
 jobs:

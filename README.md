@@ -1,5 +1,7 @@
 # Simple Notepad
 
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/wdnotepad)
+
 A faithful, lightweight clone of the classic Windows Notepad — built with
 **.NET 10** and **Avalonia (XAML)** so it runs natively on **Linux**, Windows,
 and macOS. It follows your system light/dark theme and ships with a desktop
